@@ -1,0 +1,55 @@
+{
+  "name": "komunify-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Komunify — a MERN-based community empowerment platform integrating Clerk authentication, M-Pesa Daraja payments, AWS S3, Socket.io real-time communication, and MongoDB.",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "test": "echo \"No test suite configured\""
+  },
+  "dependencies": {
+    "@clerk/clerk-sdk-node": "^4.13.23",
+    "aws-sdk": "^2.1692.0",
+    "axios": "^1.13.2",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.20.1",
+    "morgan": "^1.10.1",
+    "multer": "^2.0.2",
+    "node-fetch": "^3.3.2",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "eslint": "^9.14.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^7.2.1",
+    "nodemon": "^3.1.0",
+    "prettier": "^3.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "author": "Komunify Team",
+  "license": "MIT",
+  "keywords": [
+    "express",
+    "nodejs",
+    "mongodb",
+    "clerk",
+    "socket.io",
+    "mpesa",
+    "aws-s3",
+    "mern-backend",
+    "rest-api"
+  ]
+}
