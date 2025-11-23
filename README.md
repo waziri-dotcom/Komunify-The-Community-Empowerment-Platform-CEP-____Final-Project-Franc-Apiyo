@@ -1,52 +1,38 @@
-# MERN Stack Capstone Project
+# 🌍 Komunify – The Community Empowerment Platform (CEP)
 
-This assignment focuses on designing, developing, and deploying a comprehensive full-stack MERN application that showcases all the skills you've learned throughout the course.
+> **Empowering Communities Through Food, Finance & Technology**
 
-## Assignment Overview
+Komunify is a **digital and community-driven empowerment platform** designed to connect **food donors, vulnerable families, and aspiring entrepreneurs** into a single transparent ecosystem.
 
-You will:
-1. Plan and design a full-stack MERN application
-2. Develop a robust backend with MongoDB, Express.js, and Node.js
-3. Create an interactive frontend with React.js
-4. Implement testing across the entire application
-5. Deploy the application to production
+It merges **FoodAid (food rescue coordination)** and **FinGrow (micro-lending empowerment)** to address two key urban challenges — **food waste** and **economic exclusion** — using **technology, data, and community engagement**.
 
-## Getting Started
+---
 
-1. Accept the GitHub Classroom assignment
-2. Clone the repository to your local machine
-3. Follow the instructions in the `Week8-Assignment.md` file
-4. Plan, develop, and deploy your capstone project
+## 🚀 Project Overview
 
-## Files Included
+**Komunify (CEP)** enables:
+- 🍱 Redistribution of surplus food to verified families  
+- 💰 Micro-loans via an integrated digital wallet (FinGrow)  
+- 🧠 Financial literacy & mentorship for entrepreneurs  
+- 📊 Real-time donor dashboards aligned with **UN SDGs (1, 2, 8, 10, 12)**  
+- 🔔 Real-time notifications, live messaging, and online status via **Socket.io**
 
-- `Week8-Assignment.md`: Detailed assignment instructions
+---
 
-## Requirements
+## 🧩 Tech Stack
 
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- npm or yarn
-- Git and GitHub account
-- Accounts on deployment platforms (Render/Vercel/Netlify/etc.)
+| Layer | Technology | Description |
+|:------|:------------|:-------------|
+| **Frontend** | React.js (Vite) | Fast SPA with routing, real-time sockets |
+| **Backend** | Node.js + Express.js | REST APIs + Socket.io integration |
+| **Database** | MongoDB (Atlas) | Stores users, donations, and loan data |
+| **Real-time** | Socket.io | Bi-directional communication for live updates |
+| **Authentication** | JWT + bcryptjs | Secure token-based authentication |
+| **Payment API** | M-Pesa Daraja (sandbox) | STK push integration for wallet top-ups |
+| **Analytics** | Recharts | SDG-linked data visualization |
+| **Deployment** | Vercel (client) + Render (server) | Cloud-based deployment setup |
 
-## Project Ideas
+---
 
-The `Week8-Assignment.md` file includes several project ideas, but you're encouraged to develop your own idea that demonstrates your skills and interests.
+## 🧠 System Architecture
 
-## Submission
-
-Your project will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
-
-1. Commit and push your code regularly
-2. Include comprehensive documentation
-3. Deploy your application and add the live URL to your README.md
-4. Create a video demonstration and include the link in your README.md
-
-## Resources
-
-- [MongoDB Documentation](https://docs.mongodb.com/)
-- [Express.js Documentation](https://expressjs.com/)
-- [React Documentation](https://react.dev/)
-- [Node.js Documentation](https://nodejs.org/en/docs/)
-- [GitHub Classroom Guide](https://docs.github.com/en/education/manage-coursework-with-github-classroom) 
