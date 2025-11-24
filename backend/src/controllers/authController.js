@@ -1,39 +1,41 @@
-// src/controllers/authController.js
-// Provides endpoints to verify Clerk session (stub) and create local user record.
-
 const User = require('../models/User');
-const clerkService = require('../services/clerkService');
+const { validateEmail } = require('../utils/validators');
+const logger = require('../utils/logger');
 
-/**
- * POST /api/auth/verify-clerk
- * Body: { token }
- * The frontend (Clerk) should send a session token or user identifier.
- */
-async function verifyClerk(req, res, next) {
+exports.register = async (req, res, next) => {
   try {
-    const { token } = req.body;
-    if (!token) return res.status(400).json({ error: 'Missing token' });
+    const { name, email, phone, role } = req.body;
+    if (!email || !validateEmail(email)) return res.status(400).json({ error: 'Invalid email' });
 
-    // clerkService should verify the token and return a basic user profile
-    const profile = await clerkService.verifyToken(token);
-    if (!profile) return res.status(401).json({ error: 'Invalid clerk token' });
+    let user = await User.findOne({ email });
+    if (user) return res.status(409).json({ error: 'User already exists' });
 
-    // Find or create user in DB
-    let user = await User.findOne({ clerkId: profile.id });
-    if (!user) {
-      user = await User.create({
-        clerkId: profile.id,
-        email: profile.email,
-        name: profile.fullName || profile.firstName || 'Komunify User',
-        phone: profile.phoneNumber
-      });
-    }
+    user = await User.create({ name, email, phone, role });
+    res.status(201).json({ user });
+  } catch (err) {
+    logger.error('Register error', err);
+    next(err);
+  }
+};
 
-    // Generate a backend session token (optional) - for now we return user record
+exports.login = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ error: 'User not found' });
+    // NOTE: This is placeholder — integrate Clerk/Auth provider or JWT as needed
+    res.json({ user, token: 'placeholder-token' });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.me = async (req, res, next) => {
+  try {
+    const user = req.user; // set by auth middleware
+    if (!user) return res.status(401).json({ error: 'Unauthorized' });
     res.json({ user });
   } catch (err) {
     next(err);
   }
-}
-
-module.exports = { verifyClerk };
+};

@@ -1,11 +1,9 @@
-// src/routes/communities.js
 const express = require('express');
 const router = express.Router();
-const { listCommunities, createCommunity, joinCommunity } = require('../controllers/communityController');
-const { requireAuth } = require('../middleware/auth');
+const communityController = require('../controllers/communityController');
+const { authenticate } = require('../middleware/auth');
 
-router.get('/', listCommunities);
-router.post('/', requireAuth, createCommunity);
-router.post('/:id/join', requireAuth, joinCommunity);
+router.post('/', authenticate, communityController.createCommunity);
+router.get('/', communityController.list);
 
 module.exports = router;

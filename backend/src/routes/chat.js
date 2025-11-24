@@ -1,10 +1,9 @@
-// src/routes/chat.js
 const express = require('express');
 const router = express.Router();
-const { postMessage, getMessages } = require('../controllers/chatController');
-const { requireAuth } = require('../middleware/auth');
+const chatController = require('../controllers/chatController');
+const { authenticate } = require('../middleware/auth');
 
-router.get('/rooms/:room/messages', requireAuth, getMessages);
-router.post('/rooms/:room/messages', requireAuth, postMessage);
+router.post('/send', authenticate, chatController.sendMessage);
+router.get('/history', authenticate, chatController.history);
 
 module.exports = router;

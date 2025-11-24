@@ -1,15 +1,12 @@
-// src/models/Transaction.js
 const mongoose = require('mongoose');
 
-const TransactionSchema = new mongoose.Schema({
+const txSchema = new mongoose.Schema({
+  type: { type: String, enum: ['deposit','withdraw','loan_disbursement','repayment','donation','stk_push'], required: true },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  type: { type: String, enum: ['deposit','withdraw','loan_disbursement','repayment','donation'], required: true },
   amount: { type: Number, required: true },
-  currency: { type: String, default: 'KES' },
-  provider: String,
-  providerReference: String,
-  status: { type: String, enum: ['pending','success','failed'], default: 'pending' },
-  meta: mongoose.Schema.Types.Mixed
-}, { timestamps: true });
+  reference: String,
+  meta: Object,
+  createdAt: { type: Date, default: Date.now },
+});
 
-module.exports = mongoose.model('Transaction', TransactionSchema);
+module.exports = mongoose.model('Transaction', txSchema);

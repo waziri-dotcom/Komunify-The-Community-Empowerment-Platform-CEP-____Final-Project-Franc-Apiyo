@@ -1,22 +1,13 @@
-// src/models/Loan.js
 const mongoose = require('mongoose');
 
-const ScheduleItem = new mongoose.Schema({
-  dueDate: Date,
-  amount: Number,
-  paid: { type: Boolean, default: false },
-  paidAt: Date
-}, { _id: false });
-
-const LoanSchema = new mongoose.Schema({
+const loanSchema = new mongoose.Schema({
   borrower: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   amount: { type: Number, required: true },
-  termMonths: { type: Number, default: 3 },
-  interestRate: { type: Number, default: 0 },
-  status: { type: String, enum: ['pending','approved','active','closed','defaulted'], default: 'pending' },
-  disbursedAt: Date,
-  schedule: [ScheduleItem],
-  meta: mongoose.Schema.Types.Mixed
-}, { timestamps: true });
+  termMonths: { type: Number, default: 6 },
+  interestRate: { type: Number, default: 0.05 },
+  status: { type: String, enum: ['pending','approved','rejected','disbursed','closed'], default: 'pending' },
+  repaymentSchedule: [{ dueDate: Date, amount: Number, paid: { type: Boolean, default: false } }],
+  createdAt: { type: Date, default: Date.now },
+});
 
-module.exports = mongoose.model('Loan', LoanSchema);
+module.exports = mongoose.model('Loan', loanSchema);

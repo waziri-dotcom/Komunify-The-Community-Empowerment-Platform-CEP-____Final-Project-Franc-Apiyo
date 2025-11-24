@@ -1,12 +1,10 @@
-// src/routes/food.js
 const express = require('express');
 const router = express.Router();
-const { createListing, listNearby, matchToRecipient, confirmDelivery } = require('../controllers/foodController');
-const { requireAuth } = require('../middleware/auth');
+const foodController = require('../controllers/foodController');
+const { authenticate } = require('../middleware/auth');
 
-router.get('/', listNearby);
-router.post('/', requireAuth, createListing);
-router.post('/:listingId/match', requireAuth, matchToRecipient);
-router.post('/:listingId/confirm-delivery', requireAuth, confirmDelivery);
+router.post('/', authenticate, foodController.createListing);
+router.get('/', foodController.listAvailable);
+router.get('/:id', foodController.getById);
 
 module.exports = router;

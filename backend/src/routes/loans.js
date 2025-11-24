@@ -1,13 +1,9 @@
-// src/routes/loans.js
 const express = require('express');
 const router = express.Router();
-const { applyLoan, getLoan, approveLoan } = require('../controllers/loanController');
-const { requireAuth, requireRole } = require('../middleware/auth');
+const loanController = require('../controllers/loanController');
+const { authenticate, authorize } = require('../middleware/auth');
 
-router.post('/apply', requireAuth, applyLoan);
-router.get('/:id', requireAuth, getLoan);
-
-// admin approve
-router.post('/:id/approve', requireAuth, requireRole('admin'), approveLoan);
+router.post('/', authenticate, loanController.applyLoan);
+router.post('/:loanId/disburse', authenticate, authorize('admin'), loanController.disburseLoan);
 
 module.exports = router;

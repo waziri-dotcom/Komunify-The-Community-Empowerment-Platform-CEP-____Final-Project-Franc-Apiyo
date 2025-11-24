@@ -1,24 +1,15 @@
-// src/config/db.js
-// MongoDB connection using mongoose.
-
 const mongoose = require('mongoose');
+const logger = require('../utils/logger');
 
-async function connectDB() {
-  const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/komunify';
-  const opts = {
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/komunify';
+
+const connectDB = async () => {
+  mongoose.set('strictQuery', false);
+  await mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  };
-
-  try {
-    await mongoose.connect(uri, opts);
-    if (process.env.NODE_ENV !== 'production') {
-      console.log(`[${new Date().toISOString()}] MongoDB connected`);
-    }
-  } catch (err) {
-    console.error('MongoDB connection error:', err);
-    throw err;
-  }
-}
+  });
+  logger.info('Connected to MongoDB');
+};
 
 module.exports = { connectDB };

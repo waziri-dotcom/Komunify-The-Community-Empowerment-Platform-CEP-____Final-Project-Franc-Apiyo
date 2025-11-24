@@ -1,11 +1,9 @@
-// src/routes/projects.js
 const express = require('express');
 const router = express.Router();
-const { createProject, getProject, updateKanban } = require('../controllers/projectController');
-const { requireAuth } = require('../middleware/auth');
+const projectController = require('../controllers/projectController');
+const { authenticate } = require('../middleware/auth');
 
-router.post('/', requireAuth, createProject);
-router.get('/:id', requireAuth, getProject);
-router.put('/:id/board', requireAuth, updateKanban);
+router.post('/', authenticate, projectController.create);
+router.get('/', authenticate, projectController.list);
 
 module.exports = router;

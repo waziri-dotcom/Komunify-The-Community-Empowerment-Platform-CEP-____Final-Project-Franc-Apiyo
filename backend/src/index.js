@@ -1,28 +1,28 @@
-// src/index.js
-// Entry point - starts Express server + Socket.io and connects to DB.
+const express = require("express");
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const initSockets = require("./sockets"); // <--- now require returns function directly
 
-const http = require('http');
-const app = require('./app');
-const { connectDB } = require('./config/db');
-const socketServer = require('./sockets');
+const authRoutes = require("./routes/auth");
 
+dotenv.config();
+
+const app = express();
 const PORT = process.env.PORT || 4000;
 
-async function start() {
-  try {
-    await connectDB();
-    const server = http.createServer(app);
+app.use(cors({ origin: process.env.CORS_ORIGIN }));
+app.use(express.json());
 
-    // Initialize socket.io and bind to server
-    socketServer.attach(server);
+app.use("/api/auth", authRoutes);
 
-    server.listen(PORT, () => {
-      console.log(`Komunify API listening on http://localhost:${PORT}`);
-    });
-  } catch (err) {
-    console.error('Failed to start server:', err);
-    process.exit(1);
-  }
-}
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
-start();
+const httpServer = app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+initSockets(httpServer); // <--- now this works

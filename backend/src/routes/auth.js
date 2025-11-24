@@ -1,10 +1,10 @@
-// src/routes/auth.js
 const express = require('express');
 const router = express.Router();
-const { verifyClerk } = require('../controllers/authController');
+const authController = require('../controllers/authController');
+const { authenticate } = require('../middleware/auth');
 
-router.post('/verify-clerk', verifyClerk);
-
-// Optionally add endpoints to fetch local user profile etc.
+router.post('/register', authController.register);
+router.post('/login', authController.login);
+router.get('/me', authenticate, authController.me);
 
 module.exports = router;
