@@ -1,256 +1,305 @@
-KOMUNIFY — Community Empowerment Platform
-Empowering Communities Through Food, Finance & Tech.
 
-Built with MERN Architecture — Created by FRANC Paul Apiyo (Founder)
-SDG Alignment: 1, 2, 8, 10, 12
+# Komunify – Community Empowerment Platform
 
-📌 Table of Contents
+**Empowering Communities Through Food, Finance & Technology**
 
-Project Overview
+---
 
-Vision & Mission
+## 🎯 Project Vision
 
-The Challenge
+Komunify is a **full-stack digital ecosystem** merging food rescue coordination with micro-lending empowerment. We transform urban compassion into sustainable opportunity by connecting food donors, vulnerable families, and micro-entrepreneurs through transparent technology.
 
-The Solution
+---
 
-Core Modules
+## 🚀 Live Demo
 
-System Architecture
+- **Frontend:** [https://komunify-the-community-empowerment.vercel.app/](https://komunify-the-community-empowerment.vercel.app/)
+- **Backend API:** [https://komunify-the-community-empowerment.onrender.com](https://komunify-the-community-empowerment.onrender.com)
 
-Project Structure
+---
 
-Key User Pages
+## 🔑 Core Features
 
-Tech Stack
+| Feature | Impact |
+|---------|--------|
+| **FoodAid Engine** | Real-time geo-matched food redistribution reducing waste & hunger |
+| **FinGrow Engine** | Micro-loans + mentorship for sustainable entrepreneurship |
+| **Impact Dashboard** | SDG-linked analytics showing measurable community transformation |
+| **Community Hub** | Centralized spaces for collaboration, mentorship & resource sharing |
+| **Transparent Tracking** | Donors visualize real-time social impact of contributions |
 
-Getting Started
+---
 
-Environment Variables
+## 🏗️ Technical Stack
 
-Contribution Guidelines
+**Frontend:** React • TailwindCSS • Shadcn UI • Vite  
+**Backend:** Node.js • Express • Socket.io  
+**Database:** MongoDB Atlas  
+**Authentication:** Clerk Auth  
+**Payments:** M-Pesa Daraja API  
+**Hosting:** Vercel (Frontend) • Render (Backend)  
+**Storage:** AWS S3 / Cloudinary  
 
-License
+---
 
-Contact
+## 🎨 Platform Architecture
 
-🟩 Project Overview
+### Key Pages & Modules
 
-Komunify is a next-generation Community Empowerment Platform (CEP) that merges food redistribution, micro-financing, capacity building, and digital community collaboration into one seamless ecosystem.
+- **📊 Dashboard** – Community hub with trending projects & quick actions
+- **🥗 FoodAid** – Surplus listings, matching, pickup scheduling & real-time tracking
+- **💸 FinGrow** – Loan applications, wallet, repayment tracking & financial literacy
+- **👥 Communities** – Discovery, engagement & impact storytelling
+- **💼 Projects** – Kanban workspace with milestones & team collaboration
+- **🎓 MentorLink** – Mentor directory, session booking & achievements
+- **💬 ComChat** – Channels, direct messages & community announcements
+- **👤 Impact Profile** – Personal achievement dashboard & contribution metrics
+- **💰 Funding & Grants** – Curated opportunities for community projects
+- **📅 Events** – Unified calendar for workshops, training & community activities
+- **🛡️ Admin Panel** – Governance, moderation & analytics (Clerk Auth)
+- **☎️ Support Center** – 24/7 live chat, ticketing & knowledge base
 
-It connects:
+---
 
-Food donors → hungry and vulnerable communities
+## 🎨 Design System
 
-Entrepreneurs → micro-loans & mentorship
+**Color Palette:** Forest Green • Gold • Mint • Dark Gray  
+**UI Style:** Modern glassmorphism with warm, compassionate aesthetics  
+**Philosophy:** Human-centered design emphasizing trust, clarity & community ownership
 
-Communities → resources, collaboration & impact tracking
-
-Komunify transforms compassion into empowerment and builds a resilient, tech-enabled grassroots economy.
-
-🎯 Vision & Mission
-Vision
-
-A smart, transparent digital ecosystem that uplifts underserved communities by connecting food donors, recipients, entrepreneurs, and changemakers.
-
-Mission
-
-To eliminate hunger and ignite entrepreneurship by leveraging technology for food rescue, micro-lending, and community engagement.
-
-⚠️ The Challenge
-
-Across African cities:
-
-Tonnes of edible food go to waste daily
-
-Millions go hungry
-
-Women and youth remain unemployed
-
-Aid systems give relief but not empowerment
-
-Komunify solves this by using technology + community + finance to build a sustainable empowerment pipeline.
-
-💡 The Solution
-
-Komunify merges two powerful engines:
-
-1️⃣ FoodAid Engine
-
-A digital food rescue system
-
-Surplus food listings
-
-Donor → recipient matching
-
-Pickup scheduling
-
-Verification
-
-Real-time tracking
-
-2️⃣ FinGrow Engine
-
-Micro-financing for community entrepreneurs
-
-Loan applications
-
-Risk assessments
-
-Wallet & repayments
-
-Financial literacy portal
-
-Together, they create a circular community economy that reduces waste and promotes dignified livelihoods.
-
-🔧 Core Modules
-
-🏠 Home Dashboard — a personalized community hub
-
-🍲 FoodAid Engine — food rescue & distribution
-
-💸 FinGrow Engine — microloans, risk scoring, wallet
-
-👥 Community Discovery — find, join & follow communities
-
-📁 Project Workspace — Kanban boards, tasks, teams
-
-🎓 MentorLink Hub — connect mentors & mentees
-
-💬 ComChat — real-time chat & media
-
-👤 Impact Profile — badges, contribution stats
-
-🛍️ Resource Marketplace — guides, tools & uploads
-
-❤️ Donations — M-PESA & international giving
-
-💰 Funding & Grants — curated opportunities
-
-📅 Events & Workshops — calendars, RSVPs
-
-🛡️ Admin Panel — Clerk Auth, moderation, analytics
-
-🏗️ System Architecture
-
-MERN Stack:
-
-MongoDB — Cloud database
-
-Express.js — API & routes
-
-React.js — Frontend UI (Vite + Tailwind)
-
-Node.js — Server runtime
-
-Additional Integrations:
-
-Clerk Auth (Authentication & roles)
-
-M-PESA Daraja (STK push & wallet)
-
-Socket.io (Real-time chat)
-
-AWS S3 (Media storage)
-
-📁 Project Structure
 komunify/
 ├─ backend/
+│  ├─ package.json
+│  ├─ .env.example
 │  ├─ src/
+│  │  ├─ index.js
+│  │  ├─ app.js
 │  │  ├─ config/
+│  │  │  ├─ db.js
+│  │  │  └─ aws.js
 │  │  ├─ models/
+│  │  │  ├─ User.js
+│  │  │  ├─ Community.js
+│  │  │  ├─ FoodListing.js
+│  │  │  ├─ Loan.js
+│  │  │  ├─ Transaction.js
+│  │  │  ├─ Project.js
+│  │  │  ├─ Message.js
+│  │  │  └─ Event.js
 │  │  ├─ controllers/
+│  │  │  ├─ authController.js
+│  │  │  ├─ foodController.js
+│  │  │  ├─ loanController.js
+│  │  │  ├─ communityController.js
+│  │  │  ├─ projectController.js
+│  │  │  └─ chatController.js
 │  │  ├─ routes/
+│  │  │  ├─ auth.js
+│  │  │  ├─ food.js
+│  │  │  ├─ loans.js
+│  │  │  ├─ communities.js
+│  │  │  ├─ projects.js
+│  │  │  └─ chat.js
 │  │  ├─ services/
+│  │  │  ├─ mpesaService.js
+│  │  │  ├─ clerkService.js
+│  │  │  └─ notificationService.js
 │  │  ├─ sockets/
+│  │  │  └─ index.js
 │  │  ├─ middleware/
+│  │  │  ├─ auth.js
+│  │  │  └─ errorHandler.js
 │  │  └─ utils/
+│  │     ├─ generateId.js
+│  │     ├─ logger.js
+│  │     └─ validators.js
 │  └─ README.md
 │
 └─ frontend/
+   ├─ package.json
+   ├─ index.html
+   ├─ vite.config.js
+   ├─ tailwind.config.js
+   ├─ postcss.config.js
    ├─ src/
+   │  ├─ main.jsx
+   │  ├─ App.jsx
+   │  ├─ routes/Router.jsx
    │  ├─ components/
+   │  │  ├─ layout/
+   │  │  │  ├─ TopBar.jsx
+   │  │  │  ├─ Sidebar.jsx
+   │  │  │  └─ PageWrapper.jsx
+   │  │  ├─ ui/
+   │  │  │  ├─ Card.jsx
+   │  │  │  ├─ Button.jsx
+   │  │  │  ├─ Tabs.jsx
+   │  │  │  └─ Badge.jsx
+   │  │  └─ charts/
+   │  │     ├─ LineGraph.jsx
+   │  │     ├─ ProgressCircle.jsx
+   │  │     └─ BarChart.jsx
    │  ├─ pages/
-   │  ├─ routes/
+   │  │  ├─ Dashboard/
+   │  │  │  ├─ HomeDashboard.jsx
+   │  │  │  ├─ TrendingCommunities.jsx
+   │  │  │  ├─ QuickActions.jsx
+   │  │  │  ├─ MentorshipSessions.jsx
+   │  │  │  └─ UpdatesFeed.jsx
+   │  │  ├─ FoodAid/
+   │  │  │  ├─ SurplusListings.jsx
+   │  │  │  ├─ MatchingEngine.jsx
+   │  │  │  ├─ PickupSchedule.jsx
+   │  │  │  ├─ RecipientVerification.jsx
+   │  │  │  └─ RealTimeTracking.jsx
+   │  │  ├─ FinGrow/
+   │  │  │  ├─ LoanApplication.jsx
+   │  │  │  ├─ RiskProfiling.jsx
+   │  │  │  ├─ Wallet.jsx
+   │  │  │  ├─ RepaymentTracking.jsx
+   │  │  │  └─ LiteracyPortal.jsx
+   │  │  ├─ Communities/
+   │  │  │  ├─ CommunityList.jsx
+   │  │  │  ├─ Recommended.jsx
+   │  │  │  ├─ Stories.jsx
+   │  │  │  ├─ ImpactTop.jsx
+   │  │  │  └─ Regions.jsx
+   │  │  ├─ Projects/
+   │  │  │  ├─ MyProjects.jsx
+   │  │  │  ├─ TeamProjects.jsx
+   │  │  │  ├─ CreateProject.jsx
+   │  │  │  ├─ TaskBoard.jsx
+   │  │  │  ├─ Milestones.jsx
+   │  │  │  └─ Resources.jsx
+   │  │  ├─ Mentorship/
+   │  │  │  ├─ Directory.jsx
+   │  │  │  ├─ BecomeMentor.jsx
+   │  │  │  ├─ BookSession.jsx
+   │  │  │  ├─ SessionHistory.jsx
+   │  │  │  ├─ Notes.jsx
+   │  │  │  └─ Achievements.jsx
+   │  │  ├─ Chat/
+   │  │  │  ├─ Channels.jsx
+   │  │  │  ├─ ProjectChannels.jsx
+   │  │  │  ├─ DirectMessages.jsx
+   │  │  │  ├─ Announcements.jsx
+   │  │  │  └─ MediaDocs.jsx
+   │  │  ├─ ImpactProfile/
+   │  │  │  ├─ Profile.jsx
+   │  │  │  ├─ Contributions.jsx
+   │  │  │  ├─ ProjectsParticipated.jsx
+   │  │  │  ├─ MentorshipHours.jsx
+   │  │  │  ├─ Certificates.jsx
+   │  │  │  └─ ImpactStats.jsx
+   │  │  ├─ Marketplace/
+   │  │  │  ├─ Materials.jsx
+   │  │  │  ├─ Tools.jsx
+   │  │  │  ├─ Guides.jsx
+   │  │  │  ├─ Toolkits.jsx
+   │  │  │  └─ UploadResource.jsx
+   │  │  ├─ Donations/
+   │  │  │  ├─ Donate.jsx
+   │  │  │  ├─ Receipts.jsx
+   │  │  │  ├─ Sponsor.jsx
+   │  │  │  └─ ImpactOfDonation.jsx
+   │  │  ├─ Funding/
+   │  │  │  ├─ Grants.jsx
+   │  │  │  ├─ Eligibility.jsx
+   │  │  │  ├─ HowToApply.jsx
+   │  │  │  ├─ FundingCalendar.jsx
+   │  │  │  └─ GrantStories.jsx
+   │  │  ├─ Events/
+   │  │  │  ├─ Calendar.jsx
+   │  │  │  ├─ Workshops.jsx
+   │  │  │  ├─ MentorshipEvents.jsx
+   │  │  │  ├─ Trainings.jsx
+   │  │  │  └─ PastEvents.jsx
+   │  │  ├─ Admin/
+   │  │  │  ├─ Login.jsx
+   │  │  │  ├─ UserManagement.jsx
+   │  │  │  ├─ Moderation.jsx
+   │  │  │  ├─ Oversight.jsx
+   │  │  │  ├─ Reports.jsx
+   │  │  │  ├─ Settings.jsx
+   │  │  │  └─ Roles.jsx
+   │  │  ├─ Support/
+   │  │  │  ├─ LiveChat.jsx
+   │  │  │  ├─ Ticket.jsx
+   │  │  │  ├─ Knowledge.jsx
+   │  │  │  ├─ Troubleshoot.jsx
+   │  │  │  └─ Onboarding.jsx
    │  └─ assets/
+   │     ├─ images/
+   │     └─ icons/
    └─ README.md
 
-Oversight & analytics
 
-System settings
+---
 
-🛠️ Tech Stack
-Frontend
+## 📈 Development Roadmap
 
-React (Vite)
+| Phase | Deliverables |
+|-------|--------------|
+| **MVP** | UI design, auth, donor-recipient dashboard, pilot testing |
+| **FinGrow** | Loan engine, M-Pesa wallet, mentor module |
+| **Analytics** | SDG dashboard, admin CMS, automated reports |
+| **Deployment** | Onboarding, user testing, community training |
+| **Scale** | Data-driven improvements, multi-county expansion |
 
-Tailwind CSS
+---
 
-ShadCN UI
+## 🎯 Impact Targets (Year 1)
 
-Axios
+- **10 tonnes** of food redistributed
+- **500+ households** reached with food security support
+- **50+ micro-loans** issued to youth & women entrepreneurs
+- **≥80%** loan repayment rate
+- **≥70%** user retention rate
 
-Socket.io-client
+---
 
-Recharts
+## 🌍 SDG Alignment
 
-Backend
+✅ **SDG 1** – No Poverty (Micro-loans & financial inclusion)  
+✅ **SDG 2** – Zero Hunger (Food redistribution & waste reduction)  
+✅ **SDG 8** – Decent Work & Economic Growth (Entrepreneurship empowerment)  
+✅ **SDG 10** – Reduced Inequalities (Focus on informal settlements)  
+✅ **SDG 12** – Responsible Consumption (Resource efficiency)
 
-Node.js
+---
 
-Express
+## 💡 Sustainability Model
 
-MongoDB & Mongoose
+- **Revolving Loan Fund** – Repayments reinvest into FinGrow pool
+- **Corporate Partnerships** – CSR food supply agreements
+- **Community Ownership** – Volunteer champions manage operations
+- **Data for Good** – Impact metrics attract institutional funding
+- **Scalability** – Open-source architecture for replication
 
-Clerk Auth SDK
+---
 
-M-PESA Daraja API
+## 🚨 Risk Mitigation
 
-AWS SDK
+| Risk | Mitigation |
+|------|-----------|
+| Food donor inconsistency | MoUs with stable suppliers |
+| Loan defaults | Pre-loan financial literacy training |
+| Data security | End-to-end encryption & role-based access |
+| Volunteer burnout | Recognition incentives & digital badges |
 
-Socket.io
+---
 
+## 👨‍💼 Leadership
 
+**Founder & Project Lead:** CPA Paul Apiyo  
+*"Tech for impact, empathy for sustainability — that's Komunify."*
 
-Install dependencies
+---
 
-Backend:
+## 📬 Support & Contribution
 
-cd backend
-npm install
-npm run dev
+For issues, feature requests, or contributions, please visit our GitHub repository or contact support through the [24/7 Support Center](https://komunify-the-community-empowerment.vercel.app/support).
 
+---
 
-Frontend:
-
-cd frontend
-npm install
-npm run dev
-
-
-🤝 Contribution Guidelines
-
-We welcome contributions from developers, designers, and community innovators.
-
-Fork the project
-
-Create a feature branch
-
-Submit a descriptive PR
-
-Follow code formatting standards
-
-📄 License
-
-This project is licensed under MIT License.
-Feel free to innovate responsibly.
-
-📬 Contact
-
-Founder:
-👤 FRANC Paul Apiyo
-📧 apiyoslynk@gmail.com
-Tel: +254707050052
-🌐 www.komunify.org
-
-📍 Nairobi, Kenya
+**Komunify: Transforming urban compassion into sustainable opportunity.**
