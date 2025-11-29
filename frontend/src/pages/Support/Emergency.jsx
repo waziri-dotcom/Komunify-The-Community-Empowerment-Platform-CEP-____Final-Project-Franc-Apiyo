@@ -8,7 +8,7 @@ const Emergency = () => {
         <AlertCircle size={20}/> Emergency Support
       </h1>
 
-      <div className="bg-red-50 border border-red-200 p-6 rounded-xl shadow">
+      <div className="bg-black-50 border border-black-200 p-6 rounded-xl shadow">
         <h2 className="text-lg font-semibold">⚠ Urgent Issue? We’re Here.</h2>
         <p className="mt-2">
           Use the emergency hotline for platform outages, safety concerns, or urgent FoodAid/FinGrow issues.
@@ -17,7 +17,7 @@ const Emergency = () => {
         <div className="mt-6 space-y-4">
           <div className="flex items-center gap-3">
             <Phone size={22} className="text-red-600"/>
-            <p className="text-lg font-semibold">+254 700 000 000</p>
+            <p className="text-lg font-semibold">+254 746 416 715</p>
           </div>
 
           <button className="bg-red-600 text-white px-4 py-3 rounded-xl w-full flex items-center justify-center gap-2">

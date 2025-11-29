@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Settings as SettingsIcon, Bell, Lock, Users, Palette, Database, Mail, Shield, LogOut, Save, X } from 'lucide-react';
-import PageWrapper from '../../components/layout/PageWrapper';
 import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 

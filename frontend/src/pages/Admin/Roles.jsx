@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Shield, Users, Lock, Edit3, Trash2, Plus, Search, Filter, ChevronDown } from 'lucide-react';
-import PageWrapper from '../../components/layout/PageWrapper';
 import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Filter, Star, Users, MapPin, TrendingUp, Plus, Eye } from 'lucide-react';
-import PageWrapper from '../../components/layout/PageWrapper';
 import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 import { Badge } from '../../components/ui/Badge';

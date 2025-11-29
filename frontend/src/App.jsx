@@ -113,12 +113,12 @@ import ChatWindow from "./components/ChatWindow";
 import { Routes, Route } from "react-router-dom";
 import React, { useState } from "react";
 import PageWrapper from "./components/layout/PageWrapper.jsx";
+import RSVP from "./pages/Events/rsvp.jsx";
 
 export default function App() {
   return (
-    <PageWrapper>
     <Routes>
-      {/* All routes are wrapped inside PageWrapper */}
+      {/* PageWrapper should be used ONLY here */}
       <Route path="/" element={<PageWrapper />}>
           {/* Dashboard */}
           <Route path="/dashboard" element={<DashboardHome />} />
@@ -205,6 +205,7 @@ export default function App() {
           <Route path="/events/mentorship" element={<MentorshipEvents />} />
           <Route path="/events/trainings" element={<TrainingSessions />} />
           <Route path="/events/past" element={<PastEvents />} />
+          <Route path="/events/rsvp" element={<RSVP />} />
 
           {/* Admin */}
           <Route path="/admin/login" element={<AdminLogin />} />
@@ -221,16 +222,16 @@ export default function App() {
             element={<SupportChatPage />}
           />
           <Route path="/support/ticket" element={<TicketList />} />
-          <Route path="/support/knowledge" element={<KnowledgeBase />} />
+          <Route path="/support/kb" element={<KnowledgeBase />} />
           <Route path="/support/troubleshoot" element={<Troubleshooting />} />
           <Route path="/support/onboarding" element={<Onboarding />} />
           <Route path="/support/emergency" element={<Emergency />} />
 
-          {/* Not Found */}
-         <Route path="*" element={<div>Page Not Found</div>} />
+         {/* Fallback */}
+        <Route path="*" element={<div>Page Not Found</div>} />
+
       </Route>
     </Routes>
-    </PageWrapper>
   );
 }
 /* ---------------------------

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Plus, Edit2, Trash2, Eye, Users, Calendar, CheckCircle, AlertCircle } from 'lucide-react';
-import PageWrapper from '../../components/layout/PageWrapper';
 import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 import { Badge } from '../../components/ui/Badge';

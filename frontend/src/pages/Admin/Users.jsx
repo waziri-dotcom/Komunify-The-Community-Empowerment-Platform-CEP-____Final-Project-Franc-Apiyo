@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { Search, Filter, UserPlus, Shield, Ban, CheckCircle, AlertCircle, Download, Eye, MoreVertical } from 'lucide-react';
-import PageWrapper from '../../components/layout/PageWrapper';
 import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 

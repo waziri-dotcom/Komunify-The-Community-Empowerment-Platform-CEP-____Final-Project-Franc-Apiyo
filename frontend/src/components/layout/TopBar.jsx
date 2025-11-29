@@ -13,14 +13,60 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Optional Clerk imports - remove or replace if you use another auth system
-// Ensure @clerk/clerk-react is installed and configured at app root if you use Clerk.
+// Clerk auth imports with role-based support
 import {
   useUser,
   UserButton,
   SignInButton,
   SignOutButton,
 } from "@clerk/clerk-react";
+
+// Role-based authentication hook
+export const useUserRole = () => {
+  const { user } = useUser();
+  const role = user?.publicMetadata?.role || "member";
+  return { role, isAdmin: role === "admin", isModerator: role === "moderator" };
+};
+
+// Role-based sign in component
+export const RoleBasedSignIn = ({ onRoleSelect }) => {
+  const [selectedRole, setSelectedRole] = useState("member");
+
+  const roles = [
+    { id: "admin", label: "System Admin", icon: "🛡️" },
+    { id: "moderator", label: "Moderator", icon: "👥" },
+    { id: "analyst", label: "Analyst", icon: "⚡" },
+    { id: "support", label: "Support Lead", icon: "🔒" },
+    { id: "member", label: "Community Member", icon: "👤" },
+  ];
+
+  return (
+    <div className="bg-white dark:bg-slate-900 rounded-xl p-6 mb-6 border border-slate-200 dark:border-slate-800">
+      <label className="block text-slate-900 dark:text-white text-sm font-semibold mb-4">
+        Select Your Role
+      </label>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+        {roles.map(({ id, label, icon }) => (
+          <button
+            key={id}
+            onClick={() => {
+              setSelectedRole(id);
+              onRoleSelect?.(id);
+            }}
+            className={`p-3 rounded-lg border-2 transition-all text-xs font-medium ${
+              selectedRole === id
+                ? "bg-emerald-50 dark:bg-emerald-900/30 border-emerald-500 text-emerald-700 dark:text-emerald-300"
+                : "bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-emerald-400"
+            }`}
+          >
+            <span className="text-lg mb-1">{icon}</span>
+            <div>{label}</div>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 /**
  * TopBar

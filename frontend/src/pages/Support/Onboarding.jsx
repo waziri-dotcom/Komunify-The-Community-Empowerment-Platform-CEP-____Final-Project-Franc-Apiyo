@@ -20,7 +20,7 @@ const Onboarding = () => {
       <div className="space-y-4">
         {steps.map((s, i) => (
           <div key={i} className="bg-white p-4 rounded-xl shadow flex items-center gap-3">
-            <div className="bg-blue-600 text-white w-10 h-10 flex items-center justify-center rounded-full">
+            <div className="bg-blue-600 text-green w-10 h-10 flex items-center justify-center rounded-full">
               {i + 1}
             </div>
             <p className="font-medium">{s}</p>
