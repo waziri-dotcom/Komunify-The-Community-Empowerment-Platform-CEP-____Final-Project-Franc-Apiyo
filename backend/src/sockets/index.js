@@ -1,64 +1,32 @@
-const { Server } = require("socket.io");
-const Message = require("../models/Message");
+// src/sockets/index.js
+const Chat = require("../models/chat.model");
+const { getAIResponse } = require("../services/aiAssistantService");
 
-let io;
-
-function attach(server) {
-  if (io) return io;
-
-  io = new Server(server, {
-    cors: {
-      origin: process.env.CORS_ORIGIN || "*",
-      methods: ["GET", "POST"],
-    },
-  });
-
+function initSocket(io) {
   io.on("connection", (socket) => {
-    console.log("Socket connected:", socket.id);
+    console.log("User connected:", socket.id);
 
-    socket.on("joinRoom", ({ room }) => {
-      if (room) {
-        socket.join(room);
-        socket.emit("joinedRoom", { room });
-      }
+    socket.on("userMessage", async ({ userId, message }) => {
+      // Save user message
+      let chat = await Chat.findOne({ userId });
+      if (!chat) chat = new Chat({ userId, messages: [] });
+
+      chat.messages.push({ sender: "user", message });
+      await chat.save();
+
+      // AI response
+      const aiReply = await getAIResponse(message);
+      chat.messages.push({ sender: "ai", message: aiReply });
+      await chat.save();
+
+      // Emit AI reply back to user
+      socket.emit("aiMessage", { message: aiReply });
     });
 
-    socket.on("joinUser", ({ userId }) => {
-      if (userId) {
-        socket.join(`user:${userId}`);
-      }
+    socket.on("disconnect", () => {
+      console.log("User disconnected:", socket.id);
     });
-
-    socket.on("message", async (payload) => {
-      if (!payload || !payload.room) return;
-
-      try {
-        const msg = await Message.create({
-          room: payload.room,
-          sender: payload.sender,
-          text: payload.text,
-          attachments: payload.attachments || [],
-        });
-        io.to(payload.room).emit("message", msg);
-      } catch (err) {
-        console.error("socket message error:", err);
-      }
-    });
-
-    socket.on("disconnect", () => {});
   });
-
-  return io;
 }
 
-function emitToRoom(room, event, payload) {
-  if (!io) return;
-  io.to(room).emit(event, payload);
-}
-
-function emitToUser(userId, event, payload) {
-  if (!io) return;
-  io.to(`user:${userId}`).emit(event, payload);
-}
-
-module.exports = attach; // <--- export ONLY the attach function
+module.exports = initSocket;

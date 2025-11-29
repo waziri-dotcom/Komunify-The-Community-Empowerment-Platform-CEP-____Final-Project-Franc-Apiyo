@@ -1,29 +1,29 @@
-// Lightweight auth middleware — replace with Clerk or JWT in production
-const User = require('../models/User');
-const clerkService = require('../services/clerkService');
+const User = require("../models/user.model");
+const { getAuth } = require("@clerk/clerk-sdk-node");
 
-exports.authenticate = async (req, res, next) => {
+module.exports = async function auth(req, res, next) {
   try {
-    // try session token header
-    const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
-    if (!token) return res.status(401).json({ error: 'Missing auth token' });
+    const { userId } = getAuth(req);
 
-    const session = await clerkService.verifySession(token);
-    if (!session) return res.status(401).json({ error: 'Invalid session' });
+    if (!userId) {
+      return res.status(401).json({ message: "Unauthorized: No valid session" });
+    }
 
-    // try find user from email
-    const user = await User.findOne({ email: session.email });
-    if (!user) return res.status(401).json({ error: 'User not found' });
+    // Load MongoDB user profile
+    let user = await User.findOne({ clerkId: userId });
 
-    req.user = user;
+    if (!user) {
+      // Auto-create profile if missing
+      user = await User.create({
+        clerkId: userId,
+        role: "user", // default role
+      });
+    }
+
+    req.user = user; // Attach combined user object
     next();
   } catch (err) {
-    next(err);
+    console.error("Auth Middleware Error:", err);
+    return res.status(500).json({ message: "Authentication failure" });
   }
-};
-
-exports.authorize = (role) => (req, res, next) => {
-  if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
-  if (req.user.role !== role) return res.status(403).json({ error: 'Forbidden' });
-  next();
 };

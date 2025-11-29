@@ -1,28 +1,64 @@
 // src/services/notificationService.js
-// Simple notification service wrapper. Extend to send emails, SMS, push notifications.
+const nodemailer = require("nodemailer");
+const Notification = require("../models/Notification");
+const User = require("../models/user.model");
 
-const nodemailer = require('nodemailer');
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT || 587),
+  secure: false,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
 
-async function sendEmail({ to, subject, text, html }) {
-  // For production, configure SMTP transport or a provider like SendGrid
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.example.com',
-    port: process.env.SMTP_PORT || 587,
-    secure: false,
-    auth: {
-      user: process.env.SMTP_USER || '',
-      pass: process.env.SMTP_PASS || ''
+/**
+ * Create a DB notification and optionally send email.
+ * options: { userId, type, message, sendEmail (bool), subject }
+ */
+async function createNotification({ userId, type = "system", message, sendEmail = false, subject = "Komunify Notification" }) {
+  try {
+    const notif = await Notification.create({
+      user: userId,
+      type,
+      message,
+    });
+
+    if (sendEmail) {
+      const user = await User.findById(userId);
+      if (user?.email) {
+        await sendEmailNotification(user.email, subject, message);
+      }
     }
-  });
 
-  const result = await transporter.sendMail({ from: process.env.SMTP_FROM || 'no-reply@komunify.org', to, subject, text, html });
-  return result;
+    return notif;
+  } catch (err) {
+    console.error("createNotification error:", err);
+    throw err;
+  }
 }
 
-async function notifyUser(userId, { title, body, data }) {
-  // TODO: implement push (FCM) or SMS via Twilio
-  console.log(`notifyUser(${userId}): ${title} - ${body}`);
-  return true;
+/**
+ * Send email using configured SMTP transporter.
+ */
+async function sendEmailNotification(to, subject, html) {
+  try {
+    const info = await transporter.sendMail({
+      from: `"Komunify" <${process.env.SMTP_USER}>`,
+      to,
+      subject,
+      html: `<div style="font-family: sans-serif; line-height:1.4">${html}</div>`,
+    });
+
+    return info;
+  } catch (err) {
+    console.error("sendEmailNotification error:", err);
+    throw err;
+  }
 }
 
-module.exports = { sendEmail, notifyUser };
+module.exports = {
+  createNotification,
+  sendEmailNotification,
+};

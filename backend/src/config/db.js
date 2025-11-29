@@ -1,15 +1,16 @@
-const mongoose = require('mongoose');
-const logger = require('../utils/logger');
-
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/komunify';
+const mongoose = require("mongoose");
 
 const connectDB = async () => {
-  mongoose.set('strictQuery', false);
-  await mongoose.connect(MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-  logger.info('Connected to MongoDB');
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("✅ MongoDB connected");
+  } catch (err) {
+    console.error("❌ MongoDB connection failed:", err.message);
+    process.exit(1);
+  }
 };
 
-module.exports = { connectDB };
+module.exports = connectDB;

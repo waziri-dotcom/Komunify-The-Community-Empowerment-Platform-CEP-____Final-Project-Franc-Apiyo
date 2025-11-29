@@ -1,32 +1,41 @@
-import React from 'react'
-import PageWrapper from '../../components/layout/PageWrapper'
-import QuickActions from './QuickActions'
-import TrendingCommunities from './TrendingCommunities'
-import MentorshipSessions from './MentorshipSessions'
-import LatestUpdates from './LatestUpdates'
-import Card from '../../components/ui/Card'
+import React from "react";
+import TrendingCommunities from "./TrendingCommunities";
+import QuickActions from "./QuickActions";
+import MentorshipSessions from "./MentorshipSessions";
+import UpdatesFeed from "./UpdatesFeed";
 
-export default function DashboardHome(){
+const HomeDashboard = () => {
   return (
-    <PageWrapper title="Community Hub">
-      <div className="grid grid-cols-3 gap-6">
-        <div className="col-span-2 space-y-6">
-          <div className="bg-komunify-green text-white rounded p-6 shadow"> 
-            <h3 className="text-xl font-bold">Welcome back, Paul</h3>
-            <p className="mt-2 text-sm">See the latest activity in your communities and projects.</p>
-          </div>
+    <div className="p-6 space-y-6">
 
-          <QuickActions />
-
-          <div className="grid grid-cols-2 gap-4">
-            <TrendingCommunities />
-            <MentorshipSessions />
-          </div>
-        </div>
-        <aside className="col-span-1">
-          <LatestUpdates />
-        </aside>
+      {/* Welcome Section */}
+      <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+        <h2 className="text-2xl font-bold text-gray-800">
+          Welcome back to Komunify 🌍
+        </h2>
+        <p className="text-gray-500 mt-1">
+          Empower your community through food, finance and mentorship.
+        </p>
       </div>
-    </PageWrapper>
-  )
-}
+
+      {/* Grid Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        {/* Left Column */}
+        <div className="lg:col-span-2 space-y-6">
+          <QuickActions />
+          <TrendingCommunities />
+          <MentorshipSessions />
+        </div>
+
+        {/* Right Column */}
+        <div className="lg:col-span-1">
+          <UpdatesFeed />
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+export default HomeDashboard;

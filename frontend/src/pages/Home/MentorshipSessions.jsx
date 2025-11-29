@@ -1,13 +1,35 @@
-import React from 'react'
-import Card from '../../components/ui/Card'
-export default function MentorshipSessions(){
-  const sessions = [{title:'Small Biz Basics',date:'Nov 25'},{title:'Bookkeeping 101',date:'Dec 1'}]
+import React from "react";
+import { CalendarDays } from "lucide-react";
+
+const sampleSessions = [
+  { mentor: "Grace Wanjiku", topic: "Small Business Basics", date: "Tomorrow" },
+  { mentor: "David Otieno", topic: "Digital Marketing for SMEs", date: "Fri • 4 PM" },
+];
+
+const MentorshipSessions = () => {
   return (
-    <Card>
-      <h4 className="font-semibold mb-3">Upcoming Mentorship Sessions</h4>
-      <ul className="space-y-2">
-        {sessions.map(s=> <li key={s.title} className="flex justify-between">{s.title}<span className="text-sm text-gray-500">{s.date}</span></li>)}
-      </ul>
-    </Card>
-  )
-}
+    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+      <h3 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
+        <CalendarDays size={20} />
+        Upcoming Mentorship Sessions
+      </h3>
+
+      <div className="mt-4 space-y-4">
+        {sampleSessions.map((s, index) => (
+          <div
+            key={index}
+            className="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-100"
+          >
+            <div>
+              <p className="font-semibold text-gray-800">{s.topic}</p>
+              <p className="text-sm text-gray-500">Mentor: {s.mentor}</p>
+            </div>
+            <span className="text-sm text-blue-600 font-semibold">{s.date}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default MentorshipSessions;

@@ -1,42 +1,60 @@
-const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
-const helmet = require('helmet');
-const cookieParser = require('cookie-parser');
-const compression = require('compression');
+// src/app.js
+const express = require("express");
+const cors = require("cors");
+const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
+const { ClerkExpressWithAuth } = require("@clerk/clerk-sdk-node");
 
-const authRoutes = require('./routes/auth');
-const foodRoutes = require('./routes/food');
-const loansRoutes = require('./routes/loans');
-const communitiesRoutes = require('./routes/communities');
-const projectsRoutes = require('./routes/projects');
-const chatRoutes = require('./routes/chat');
+// ====== ROUTES ======
+const authRoutes = require("./routes/auth.routes");
+const userRoutes = require("./routes/user.routes");
+const communityRoutes = require("./routes/community.routes");
+const donationRoutes = require("./routes/donation.routes");
+const loanRoutes = require("./routes/loan.routes");
+const eventRoutes = require("./routes/event.routes");
+const ticketRoutes = require("./routes/ticket.routes");
+const foodRoutes = require("./routes/foodAid.routes");
+const chatRoutes = require("./routes/chat.routes");
+const mpesaRoutes = require("./routes/donation.routes"); // double-check if this should be donation.routes
 
-const { errorHandler } = require('./middleware/errorHandler');
-const logger = require('./utils/logger');
+// ====== MIDDLEWARE ======
+const errorHandler = require("./middleware/errorHandler");
 
+// ====== INITIALIZE EXPRESS ======
 const app = express();
 
-app.use(helmet());
-app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }));
-app.use(compression());
-app.use(express.json({ limit: '5mb' }));
+// ====== GLOBAL MIDDLEWARE ======
+app.use(cors({ origin: "*", credentials: true }));
+app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(morgan('combined', { stream: logger.stream }));
+app.use(morgan("dev"));
 
-// API Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/food', foodRoutes);
-app.use('/api/loans', loansRoutes);
-app.use('/api/communities', communitiesRoutes);
-app.use('/api/projects', projectsRoutes);
-app.use('/api/chat', chatRoutes);
+// ====== CLERK AUTH MIDDLEWARE ======
+app.use(ClerkExpressWithAuth());
 
-// health
-app.get('/health', (req, res) => res.json({ status: 'ok', env: process.env.NODE_ENV || 'development' }));
+// ====== API ROUTES ======
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/community", communityRoutes);
+app.use("/api/donations", donationRoutes);
+app.use("/api/loans", loanRoutes);
+app.use("/api/events", eventRoutes);
+app.use("/api/tickets", ticketRoutes);
+app.use("/api/food", foodRoutes);
+app.use("/api/chat", chatRoutes);
+app.use("/api/mpesa", mpesaRoutes);
 
-// error handler (last middleware)
+// ====== HEALTH CHECK ======
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    service: "Komunify Backend API",
+    timestamp: new Date(),
+  });
+});
+
+// ====== ERROR HANDLER ======
 app.use(errorHandler);
 
 module.exports = app;

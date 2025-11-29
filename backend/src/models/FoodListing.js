@@ -1,19 +1,18 @@
 const mongoose = require('mongoose');
 
-const foodListingSchema = new mongoose.Schema({
-  donor: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+const FoodListingSchema = new mongoose.Schema({
+  donorId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   title: { type: String, required: true },
-  description: String,
-  category: String,
-  quantity: Number,
-  unit: { type: String, default: 'kg' },
-  expiresAt: Date,
-  pickupLocation: {
+  description: { type: String },
+  quantity: { type: Number, required: true },
+  category: { type: String, enum: ['Cooked Meal','Dry Food','Produce','Mixed'], required: true },
+  images: [{ url: String, key: String }],
+  location: {
     address: String,
     coordinates: { type: [Number], index: '2dsphere' }
   },
-  status: { type: String, enum: ['available','matched','picked','cancelled'], default: 'available' },
-  createdAt: { type: Date, default: Date.now },
-});
+  status: { type: String, enum: ['available','reserved','collected','expired'], default: 'available' },
+  expiresAt: { type: Date },
+}, { timestamps: true });
 
-module.exports = mongoose.model('FoodListing', foodListingSchema);
+module.exports = mongoose.model('FoodListing', FoodListingSchema);
