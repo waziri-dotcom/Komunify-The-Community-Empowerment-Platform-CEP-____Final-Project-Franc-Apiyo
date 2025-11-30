@@ -13,8 +13,8 @@ Komunify is a **full-stack digital ecosystem** merging food rescue coordination 
 
 ## 🚀 Live Demo
 
-- **Frontend:** [https://komunify-the-community-empowerment.vercel.app/](https://komunify-the-community-empowerment.vercel.app/)
-- **Backend API:** [https://komunify-the-community-empowerment.onrender.com](https://komunify-the-community-empowerment.onrender.com)
+- **Frontend:** https://komunify-the-community-empowerment-one.vercel.app
+- **Backend API:** https://komunify-the-community-empowerment.onrender.com
 
 ---
 
