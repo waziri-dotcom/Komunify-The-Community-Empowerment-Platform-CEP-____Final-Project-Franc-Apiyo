@@ -113,7 +113,7 @@ import ChatWindow from "./components/ChatWindow";
 import { Routes, Route } from "react-router-dom";
 import React, { useState } from "react";
 import PageWrapper from "./components/layout/PageWrapper.jsx";
-import RSVP from "./pages/Events/rsvp.jsx";
+import RSVP from "./pages/Events/Rsvp.jsx";
 
 export default function App() {
   return (
