@@ -1,7 +1,7 @@
 import React from "react";
 import { Shuffle, CheckCircle, Users } from "lucide-react";
 import Card from "../../components/ui/Card";
-import Button from "../../components/ui/button";
+import Button from "../../components/ui/Button";
 
 const MatchingEngine = () => {
   const matches = [
